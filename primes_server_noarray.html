@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="Lazarus SynEdit Html Exporter">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>primes</title>
+</head>
+<body text="black" bgcolor="#FFFFFF"><pre><code><font  size=3 face="Courier New"><font color="black"><b>program </b>primes<font color="red">;
+<b>{$mode objfpc}{$H+}
+</b></font><b>uses </b>crt<font color="red">,</font>sysutils<font color="red">;
+</font><b>var </b>cis<font color="red">,</font>i<font color="red">,</font>l<font color="red">,</font>pprv<font color="red">:</font>QWord<font color="red">;
+    </font>F<font color="red">,</font>FF<font color="red">,</font>FFF<font color="red">:</font>TextFile<font color="red">;
+</font><b>begin
+</b>AssignFile<font color="red">(</font>FFF<font color="red">,</font><font color="blue">'save.txt'</font><font color="red">);
+</font>AssignFile<font color="red">(</font>FF<font color="red">,</font><font color="blue">'logprv.txt'</font><font color="red">);
+</font>AssignFile<font color="red">(</font>F<font color="red">,</font><font color="blue">'prv.txt'</font><font color="red">);
+</font><b>try
+    </b><font color="blue"><b>// Create the file, write some text and close it.
+    </b></font>reset<font color="red">(</font>FFF<font color="red">);
+    </font>Readln<font color="red">(</font>FFF<font color="red">,</font>cis<font color="red">);
+
+  </font><b>except
+    </b><font color="blue"><b>// If there was an error the reason can be found here
+    </b></font><b>on </b>E<font color="red">: </font>EInOutError <b>do
+    begin
+    </b>rewrite<font color="red">(</font>FFF<font color="red">);
+    </font>cis<font color="red">:=</font><font color="navy">1</font><font color="red">;
+    </font><b>end</b><font color="red">;
+</font><b>end</b><font color="red">;
+  </font><b>try
+      </b><font color="blue"><b>// Create the file, write some text and close it.
+      </b></font>reset<font color="red">(</font>F<font color="red">);
+      </font>reset<font color="red">(</font>FF<font color="red">);
+
+    </font><b>except
+      </b><font color="blue"><b>// If there was an error the reason can be found here
+      </b></font><b>on </b>E<font color="red">: </font>EInOutError <b>do
+      begin
+      </b>Rewrite<font color="red">(</font>F<font color="red">);
+      </font>rewrite<font color="red">(</font>FF<font color="red">);
+      </font><b>end</b><font color="red">;
+  </font><b>end</b><font color="red">;
+</font>clrscr<font color="red">;
+</font>Writeln<font color="red">(</font>cis<font color="red">);
+</font><b>repeat
+ begin
+ </b>cis<font color="red">:=</font>cis<font color="red">+</font><font color="navy">2</font><font color="red">;
+ </font>l<font color="red">:=</font><font color="navy">0</font><font color="red">;
+ </font><b>If </b><font color="red">(((</font>cis<font color="red">)</font><b>mod</b><font color="red">(</font><font color="navy">2</font><font color="red">))=</font><font color="navy">0</font><font color="red">) </font><b>then
+ begin
+ </b>l<font color="red">:=</font>l<font color="red">+</font><font color="navy">1</font><font color="red">;
+ </font><b>end</b><font color="red">;
+ </font><b>If </b><font color="red">(((</font>cis<font color="red">)</font><b>mod</b><font color="red">(</font><font color="navy">2</font><font color="red">))&lt;&gt;</font><font color="navy">0</font><font color="red">) </font><b>then
+ begin
+ </b>i<font color="red">:=(</font>cis<font color="red">-(</font>cis<font color="red">-</font><font color="navy">1</font><font color="red">));
+ </font><b>repeat
+   begin
+   </b>i<font color="red">:=</font>i<font color="red">+</font><font color="navy">2</font><font color="red">;
+  </font><b>If </b><font color="red">(((</font>cis<font color="red">)</font><b>mod</b><font color="red">(</font>i<font color="red">))=</font><font color="navy">0</font><font color="red">) </font><b>then
+      begin
+        </b>l<font color="red">:=</font>l<font color="red">+</font><font color="navy">1
+      </font><b>end</b><font color="red">;
+   </font><b>end</b><font color="red">;
+ </font><b>until </b><font color="red">(</font>i<font color="red">=(</font>cis<font color="red">-</font><font color="navy">2</font><font color="red">)) </font><b>or </b><font color="red">(</font>l<font color="red">&gt;</font><font color="navy">0</font><font color="red">);
+ </font><b>end</b><font color="red">;
+  </font><b>If </b><font color="red">(</font>l<font color="red">=</font><font color="navy">0</font><font color="red">) </font><b>then
+   begin
+     </b>pprv<font color="red">:=</font>cis<font color="red">;
+     </font>append<font color="red">(</font>F<font color="red">);
+     </font>append<font color="red">(</font>FF<font color="red">);
+     </font>writeln<font color="red">(</font>F<font color="red">,</font>pprv<font color="red">);
+     </font>writeln<font color="red">(</font>FF<font color="red">,</font>pprv<font color="red">);
+     </font>writeln<font color="red">(</font>FF<font color="red">,</font>DateTimeToStr<font color="red">(</font>now<font color="red">));
+     </font>writeln<font color="red">(</font>FF<font color="red">,</font><font color="blue">' '</font><font color="red">);
+     </font>CloseFile<font color="red">(</font>FF<font color="red">);
+     </font>CloseFile<font color="red">(</font>F<font color="red">);
+   </font><b>end</b><font color="red">;
+ </font><b>end</b><font color="red">;
+</font>rewrite<font color="red">(</font>FFF<font color="red">);
+</font>writeln<font color="red">(</font>FFF<font color="red">,</font>cis<font color="red">);
+</font>CloseFile<font color="red">(</font>FFF<font color="red">);
+</font><b>until </b>keypressed<font color="red">;
+</font>clrscr<font color="red">;
+</font>writeln<font color="red">(</font><font color="blue">'Nejvetsi nalezene prvocislo '</font><font color="red">,</font>pprv<font color="red">);
+</font>writeln<font color="red">;
+</font>writeln<font color="red">(</font><font color="blue">'Pro ukonceni stisknete ENTER!'</font><font color="red">);
+</font>readln<font color="red">;
+</font>readln<font color="red">;
+</font><b>end</b><font color="red">.
+</font></font>
+</code></pre>
+</body>
+</html>
