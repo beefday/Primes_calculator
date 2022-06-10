@@ -8,12 +8,10 @@ AssignFile(FFF,'save.txt');
 AssignFile(FF,'logprv.txt');
 AssignFile(F,'prv.txt');
 try
-    // Create the file, write some text and close it.
     reset(FFF);
     Readln(FFF,cis);
 
   except
-    // If there was an error the reason can be found here
     on E: EInOutError do
     begin
     rewrite(FFF);
@@ -21,12 +19,10 @@ try
     end;
 end;
   try
-      // Create the file, write some text and close it.
       reset(F);
       reset(FF);
 
     except
-      // If there was an error the reason can be found here
       on E: EInOutError do
       begin
       Rewrite(F);
